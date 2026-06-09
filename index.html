@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI活用推進ご提案｜メイジン様×TOKON</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Sans:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #FAFAFA;
+  --surface: #FFFFFF;
+  --surface-alt: #F3F4F6;
+  --text: #1A1A2E;
+  --text-sub: #6B7280;
+  --accent: #C41E3A;
+  --accent-light: #FEE2E8;
+  --blue: #2563EB;
+  --blue-light: #DBEAFE;
+  --gold: #D97706;
+  --gold-light: #FEF3C7;
+  --green: #059669;
+  --green-light: #D1FAE5;
+  --border: #E5E7EB;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.08);
+  --radius: 12px;
+  --font-body: 'Noto Sans JP', sans-serif;
+  --font-display: 'DM Sans', 'Noto Sans JP', sans-serif;
+  --font-scale: 1;
+}
+
+[data-theme="dark"] {
+  --bg: #0F0F1A;
+  --surface: #1A1A2E;
+  --surface-alt: #252540;
+  --text: #F0F0F5;
+  --text-sub: #9CA3AF;
+  --accent: #F06292;
+  --accent-light: rgba(240,98,146,0.15);
+  --blue: #60A5FA;
+  --blue-light: rgba(96,165,250,0.15);
+  --gold: #FBBF24;
+  --gold-light: rgba(251,191,36,0.12);
+  --green: #34D399;
+  --green-light: rgba(52,211,153,0.12);
+  --border: #374151;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: calc(16px * var(--font-scale));
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── Controls ── */
+.controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.controls button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.controls button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.controls button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Slide Container ── */
+.slide {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+}
+
+.slide-inner {
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* ── Cover ── */
+.cover {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -20%;
+  width: 140%;
+  height: 160%;
+  background: radial-gradient(ellipse at 30% 20%, var(--accent-light) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, var(--blue-light) 0%, transparent 50%);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.cover .slide-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.cover-label {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: calc(0.75rem * var(--font-scale));
+  font-weight: 700;
+  padding: 6px 20px;
+  border-radius: 100px;
+  letter-spacing: 0.08em;
+  margin-bottom: 32px;
+}
+
+.cover h1 {
+  font-family: var(--font-display);
+  font-size: calc(2.8rem * var(--font-scale));
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.cover h1 span {
+  display: block;
+  font-size: calc(1.4rem * var(--font-scale));
+  font-weight: 400;
+  color: var(--text-sub);
+  letter-spacing: 0;
+  margin-top: 8px;
+}
+
+.cover-meta {
+  font-size: calc(0.9rem * var(--font-scale));
+  color: var(--text-sub);
+  margin-top: 40px;
+  line-height: 2;
+}
+
+.cover-meta strong {
+  color: var(--text);
+}
+
+/* ── Section Headers ── */
+.section-num {
+  font-family: var(--font-display);
+  font-size: calc(0.8rem * var(--font-scale));
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.slide h2 {
+  font-size: calc(2rem * var(--font-scale));
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin-bottom: 32px;
+}
+
+.slide h2 small {
+  display: block;
+  font-size: calc(0.85rem * var(--font-scale));
+  font-weight: 400;
+  color: var(--text-sub);
+  letter-spacing: 0;
+  margin-top: 4px;
+}
+
+.slide h3 {
+  font-size: calc(1.2rem * var(--font-scale));
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* ── Cards ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.card-icon svg, .sec-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.card-icon.red { background: var(--accent-light); color: var(--accent); }
+.card-icon.blue { background: var(--blue-light); color: var(--blue); }
+.card-icon.gold { background: var(--gold-light); color: var(--gold); }
+.card-icon.green { background: var(--green-light); color: var(--green); }
+
+.card h4 {
+  font-size: calc(1.05rem * var(--font-scale));
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: calc(0.85rem * var(--font-scale));
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+/* ── Issue Cards ── */
+.issue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.issue-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.issue-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.issue-item h4 {
+  font-size: calc(0.95rem * var(--font-scale));
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.issue-item p {
+  font-size: calc(0.82rem * var(--font-scale));
+  color: var(--text-sub);
+}
+
+/* ── Proposal Overview ── */
+.proposal-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.proposal-box {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.proposal-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.proposal-box.box-blue::before { background: var(--blue); }
+.proposal-box.box-red::before { background: var(--accent); }
+
+.proposal-box .box-label {
+  display: inline-block;
+  font-size: calc(0.72rem * var(--font-scale));
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+.box-blue .box-label { background: var(--blue-light); color: var(--blue); }
+.box-red .box-label { background: var(--accent-light); color: var(--accent); }
+
+.proposal-box h3 {
+  font-size: calc(1.3rem * var(--font-scale));
+  margin-bottom: 12px;
+}
+
+.proposal-box p {
+  font-size: calc(0.85rem * var(--font-scale));
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+.proposal-box ul {
+  list-style: none;
+  margin-top: 16px;
+}
+
+.proposal-box li {
+  font-size: calc(0.85rem * var(--font-scale));
+  padding: 6px 0;
+  padding-left: 20px;
+  position: relative;
+  color: var(--text-sub);
+}
+
+.proposal-box li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--text-sub);
+}
+
+/* ── Course Detail ── */
+.course-recommend {
+  background: var(--surface);
+  border: 2px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-top: 24px;
+  position: relative;
+}
+
+.course-recommend::before {
+  content: 'おすすめ';
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: var(--blue);
+  color: #fff;
+  font-size: calc(0.72rem * var(--font-scale));
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 100px;
+}
+
+.course-pair {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.course-card {
+  background: var(--surface-alt);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.course-card .course-tag {
+  display: inline-block;
+  font-size: calc(0.7rem * var(--font-scale));
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.tag-gold { background: var(--gold-light); color: var(--gold); }
+.tag-navy { background: var(--blue-light); color: var(--blue); }
+
+.course-card h4 {
+  font-size: calc(1rem * var(--font-scale));
+  margin-bottom: 6px;
+}
+
+.course-card p {
+  font-size: calc(0.8rem * var(--font-scale));
+  color: var(--text-sub);
+}
+
+.course-plus {
+  font-family: var(--font-display);
+  font-size: calc(1.5rem * var(--font-scale));
+  font-weight: 700;
+  color: var(--text-sub);
+}
+
+.course-flow {
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: var(--surface-alt);
+  border-radius: 10px;
+  font-size: calc(0.85rem * var(--font-scale));
+  color: var(--text-sub);
+  text-align: center;
+}
+
+.course-flow strong { color: var(--text); }
+
+/* ── Nurture Plan ── */
+.nurture-timeline {
+  margin-top: 24px;
+  position: relative;
+  padding-left: 40px;
+}
+
+.nurture-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.nurture-step {
+  position: relative;
+  margin-bottom: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.nurture-step::before {
+  content: '';
+  position: absolute;
+  left: -33px;
+  top: 28px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+}
+
+.nurture-step .step-phase {
+  font-size: calc(0.7rem * var(--font-scale));
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.nurture-step h4 {
+  font-size: calc(1rem * var(--font-scale));
+  margin-bottom: 8px;
+}
+
+.nurture-step p {
+  font-size: calc(0.82rem * var(--font-scale));
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+/* ── Security Section ── */
+.risk-banner {
+  background: linear-gradient(135deg, var(--accent), #991B1B);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.risk-banner h3 {
+  font-size: calc(1.4rem * var(--font-scale));
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.risk-banner p {
+  font-size: calc(0.9rem * var(--font-scale));
+  opacity: 0.9;
+  line-height: 1.8;
+}
+
+.security-points {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.sec-point {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.sec-point .sec-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  color: var(--text);
+}
+
+.sec-point h4 {
+  font-size: calc(0.9rem * var(--font-scale));
+  margin-bottom: 6px;
+}
+
+.sec-point p {
+  font-size: calc(0.78rem * var(--font-scale));
+  color: var(--text-sub);
+}
+
+.plan-compare {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.plan-compare table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: calc(0.82rem * var(--font-scale));
+}
+
+.plan-compare th, .plan-compare td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.plan-compare th {
+  background: var(--surface-alt);
+  font-weight: 700;
+  font-size: calc(0.78rem * var(--font-scale));
+  color: var(--text-sub);
+}
+
+.plan-compare td:first-child {
+  font-weight: 500;
+}
+
+.badge-danger {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: calc(0.7rem * var(--font-scale));
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+.badge-safe {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: calc(0.7rem * var(--font-scale));
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+/* ── Cost Summary ── */
+.cost-table {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cost-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: calc(0.85rem * var(--font-scale));
+}
+
+.cost-table th, .cost-table td {
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.cost-table th {
+  background: var(--surface-alt);
+  font-weight: 700;
+  font-size: calc(0.78rem * var(--font-scale));
+  color: var(--text-sub);
+}
+
+.cost-table tr:last-child td {
+  border-bottom: none;
+}
+
+.cost-highlight {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(1.1rem * var(--font-scale));
+  color: var(--accent);
+}
+
+.cost-note {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: var(--surface-alt);
+  border-radius: 10px;
+  font-size: calc(0.8rem * var(--font-scale));
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+
+/* ── Schedule ── */
+.schedule-bar {
+  margin-top: 28px;
+  display: flex;
+  gap: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.sched-block {
+  flex: 1;
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.sched-block:not(:last-child)::after {
+  content: '▶';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.sched-block:nth-child(1) { background: var(--accent-light); }
+.sched-block:nth-child(2) { background: var(--blue-light); }
+.sched-block:nth-child(3) { background: var(--gold-light); }
+.sched-block:nth-child(4) { background: var(--green-light); }
+
+.sched-block .sched-period {
+  font-size: calc(0.7rem * var(--font-scale));
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  color: var(--text-sub);
+}
+
+.sched-block h4 {
+  font-size: calc(0.85rem * var(--font-scale));
+  margin-bottom: 4px;
+}
+
+.sched-block p {
+  font-size: calc(0.72rem * var(--font-scale));
+  color: var(--text-sub);
+}
+
+/* ── Closing ── */
+.closing {
+  text-align: center;
+}
+
+.closing-message {
+  font-size: calc(1.6rem * var(--font-scale));
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.closing-sub {
+  font-size: calc(0.95rem * var(--font-scale));
+  color: var(--text-sub);
+  margin-bottom: 48px;
+  line-height: 1.8;
+}
+
+.closing-contact {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: inline-block;
+  text-align: left;
+  box-shadow: var(--shadow);
+}
+
+.closing-contact h4 {
+  font-size: calc(0.9rem * var(--font-scale));
+  margin-bottom: 12px;
+}
+
+.closing-contact p {
+  font-size: calc(0.82rem * var(--font-scale));
+  color: var(--text-sub);
+  line-height: 2;
+}
+
+/* ── Footer ── */
+.slide-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: calc(0.7rem * var(--font-scale));
+  color: var(--text-sub);
+  opacity: 0.5;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .slide { padding: 40px 20px; }
+  .cover h1 { font-size: calc(2rem * var(--font-scale)); }
+  .proposal-two { grid-template-columns: 1fr; }
+  .course-pair { grid-template-columns: 1fr; }
+  .course-plus { text-align: center; }
+  .security-points { grid-template-columns: 1fr; }
+  .schedule-bar { flex-direction: column; }
+  .sched-block::after { display: none; }
+}
+
+/* ── Print ── */
+@media print {
+  .controls { display: none; }
+  .slide { min-height: auto; page-break-after: always; padding: 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Controls -->
+<div class="controls">
+  <button onclick="toggleTheme()" title="ダーク/ライトモード切替" id="themeBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  <button onclick="changeFontSize(1)" title="文字を大きく">A+</button>
+  <button onclick="changeFontSize(-1)" title="文字を小さく">A-</button>
+</div>
+
+<!-- ═══════════ SLIDE 1: COVER ═══════════ -->
+<section class="slide cover" id="s1">
+  <div class="slide-inner">
+    <div class="cover-label">ご提案資料</div>
+    <h1>
+      AI活用推進ご提案
+      <span>社員研修 × 法人プラン導入で、組織のAI活用を加速する</span>
+    </h1>
+    <div class="cover-meta">
+      <strong>メイジン株式会社</strong> 黄海様<br>
+      2026年6月｜株式会社TOKON 事業開発室 AI/デジタルソリューションG
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 2: 現状と課題 ═══════════ -->
+<section class="slide" id="s2">
+  <div class="slide-inner">
+    <div class="section-num">Section 01</div>
+    <h2>
+      お打ち合わせで確認した現状と課題
+      <small>2026年6月5日 商談にて</small>
+    </h2>
+    <div class="issue-list">
+      <div class="issue-item">
+        <div class="issue-num">1</div>
+        <div>
+          <h4>シャドウAIの蔓延</h4>
+          <p>採用チーム内で個人の無料／有料プランが混在。4〜5名が個人課金しているが、ツールもプランもバラバラの状態。情報セキュリティ上のリスクが放置されている。</p>
+        </div>
+      </div>
+      <div class="issue-item">
+        <div class="issue-num">2</div>
+        <div>
+          <h4>AI活用レベルのばらつき</h4>
+          <p>黄海様個人はスライド作成時間の大幅短縮など高い活用水準に達しているが、チーム全体（約14名）としては底上げが必要。</p>
+        </div>
+      </div>
+      <div class="issue-item">
+        <div class="issue-num">3</div>
+        <div>
+          <h4>法人プラン未導入</h4>
+          <p>法人プラン（ChatGPT Business等）が未導入のため、学習オプトアウトの保証がなく、組織的なコラボレーション機能も活用できていない。</p>
+        </div>
+      </div>
+      <div class="issue-item">
+        <div class="issue-num">4</div>
+        <div>
+          <h4>AI推進を牽引する人材の不在</h4>
+          <p>セキュリティ点検やAI活用推進を専任で担える「突き抜けた人材」が社内にいない。環境変化のスピードに対し、体制整備が追いついていない。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 3: 提案の全体像 ═══════════ -->
+<section class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="section-num">Section 02</div>
+    <h2>ご提案の全体像<small>2つの施策で、チーム全体と精鋭人材の両方を引き上げる</small></h2>
+    <div class="proposal-two">
+      <div class="proposal-box box-blue">
+        <span class="box-label">施策 ①</span>
+        <h3>全体向けAI研修</h3>
+        <p>採用チーム約14名を対象に、AI活用の基礎スキルとリスク管理を2コースで実施。全員の足並みを揃え、安全にAIを使える土台をつくる。</p>
+        <ul>
+          <li>対象：採用チーム全員（約14名）</li>
+          <li>形式：集合研修（2コース選択）</li>
+          <li>目的：基礎力の底上げ＋ルール策定</li>
+        </ul>
+      </div>
+      <div class="proposal-box box-red">
+        <span class="box-label">施策 ②</span>
+        <h3>AI推進担当 育成プラン</h3>
+        <p>精鋭1名を選抜し、1対1の個別指導で「社内で最もAIを使いこなす人材」に育成。メタプロンプトからコーディングAI・ハーネスエンジニアリングまで一気に引き上げる。</p>
+        <ul>
+          <li>対象：選抜1名（AI推進担当候補）</li>
+          <li>形式：1対1 個別指導（全6回）</li>
+          <li>目的：社内DX推進のキーパーソン育成</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 4: 施策① 全体研修 ═══════════ -->
+<section class="slide" id="s4">
+  <div class="slide-inner">
+    <div class="section-num">Section 03</div>
+    <h2>施策① 全体向けAI研修<small>推奨コースの組み合わせ</small></h2>
+
+    <div class="course-recommend">
+      <div class="course-pair">
+        <div class="course-card">
+          <span class="course-tag tag-gold">新入社員 / 初級者</span>
+          <h4>B｜AI×ビジネス基礎スキル学習</h4>
+          <p>日常で使える実技中心のAIスタートアップ研修。プロンプトの基本、メール下書き、リサーチ、スライド操作、バイブコーディングまで。「迷わず使える型」が身につく。</p>
+        </div>
+        <div class="course-plus">＋</div>
+        <div class="course-card">
+          <span class="course-tag tag-navy">管理職 / 経営幹部</span>
+          <h4>D｜AIリスク管理＆ガバナンス講習</h4>
+          <p>情報漏洩・著作権・学習リスクの全体像を押さえ、ケーススタディとFAQで学ぶ。社内AIルールの設計実践まで行い、安全な導入基盤をつくる。</p>
+        </div>
+      </div>
+      <div class="course-flow">
+        <strong>推奨受講フロー：</strong>まず<strong>D（リスク管理）</strong>で全員の意識とルールを統一 → 次に<strong>B（基礎スキル）</strong>で実務活用を加速
+      </div>
+    </div>
+
+    <div class="cost-note">
+      ※ 上記は推奨の2コース構成です。A（AI-CAMP ワークショップ）やC（メタスキル学習）への差し替え・追加も柔軟に対応可能です。<br>
+      ※ 各コース約2時間、対面またはオンラインで実施します。
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 5: 施策② AI推進担当育成 ═══════════ -->
+<section class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="section-num">Section 04</div>
+    <h2>施策② AI推進担当 育成プラン<small>精鋭1名を「社内で最もAIを使いこなす人材」に</small></h2>
+    <p style="font-size:calc(0.88rem * var(--font-scale)); color:var(--text-sub); margin-bottom:8px;">
+      商談でお話しした「突き抜けた人材を1人つくる」を実現する個別指導プログラムです。<br>
+      全6回の1対1セッションで、プロンプト技術からコーディングAI活用・業務自動化まで一気に引き上げ、<br>
+      社内AI推進を自走できるキーパーソンを育成します。
+    </p>
+    <div class="nurture-timeline">
+      <div class="nurture-step">
+        <div class="step-phase">Session 1 ─ メタプロンプト習得</div>
+        <h4>「AIへの問いかけ」を根本から変える</h4>
+        <p>CRAFTフレームからPACTフレームへの進化。コンテキストエンジニアリングの基本思想を理解し、AIの出力品質を劇的に変えるメタプロンプト技術を体得する。</p>
+      </div>
+      <div class="nurture-step">
+        <div class="step-phase">Session 2 ─ バイブコーディング入門</div>
+        <h4>自然言語だけで業務ツールをつくる</h4>
+        <p>コードを書かずにAIと対話しながらアプリやツールを開発する「バイブコーディング」を実践。実際の業務課題（履歴書作成の自動化等）を題材に、即戦力スキルを獲得。</p>
+      </div>
+      <div class="nurture-step">
+        <div class="step-phase">Session 3 ─ コーディングAI活用</div>
+        <h4>Claude Code / Codex を実務に組み込む</h4>
+        <p>ターミナルから直接AIに指示を出すClaude Codeや、OpenAI Codexなどのコーディングエージェントの使い分けと実践。反復作業の自動化、データ処理パイプラインの構築を体験。</p>
+      </div>
+      <div class="nurture-step">
+        <div class="step-phase">Session 4 ─ GitHub ＋ 開発ワークフロー</div>
+        <h4>AIと協働する開発基盤を整える</h4>
+        <p>GitHubの基本操作からブランチ戦略まで。AIが生成したコードのバージョン管理、チームでの共有・レビュー体制を構築。ノーコード出身でも「つくったものを安全に管理する」力を身につける。</p>
+      </div>
+      <div class="nurture-step">
+        <div class="step-phase">Session 5 ─ ハーネスエンジニアリング</div>
+        <h4>AIが最大限に力を発揮できる「環境」を設計する</h4>
+        <p>プロンプトだけでなく、AIに渡すコンテキスト・ナレッジ・ツール群を設計する「ハーネスエンジニアリング」の考え方を習得。社内業務に最適化されたAI活用環境を自ら構築できるようになる。</p>
+      </div>
+      <div class="nurture-step">
+        <div class="step-phase">Session 6 ─ 学習習慣 ＋ 自走体制</div>
+        <h4>AI進化に追従し続ける「学び方」を手に入れる</h4>
+        <p>AIの技術進化は速い。新モデル・新機能のキャッチアップ方法、情報ソースの選定、実験→検証→業務適用のサイクルを確立。社内へ知見を展開する研修設計・浸透戦略まで含めて、完全な自走体制を構築する。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 6: 法人プラン導入 ═══════════ -->
+<section class="slide" id="s6">
+  <div class="slide-inner">
+    <div class="section-num">Section 05</div>
+    <h2>法人プラン導入の必要性<small>なぜ今すぐ切り替えるべきなのか</small></h2>
+
+    <div class="risk-banner">
+      <h3>個人プランのままでは、情報漏洩リスクを防げません</h3>
+      <p>無料・個人プランのAIは、入力データが学習に使用される可能性があります。<br>
+      採用業務では個人情報を扱う以上、「入れるな」では防げない現実に対し、<br>
+      <strong>仕組みとして守る</strong>体制が不可欠です。</p>
+    </div>
+
+    <div class="security-points">
+      <div class="sec-point">
+        <div class="sec-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h4>学習オプトアウト保証</h4>
+        <p>法人プランは入力データの学習不使用を明言。個人情報を扱う業務でも安心。</p>
+      </div>
+      <div class="sec-point">
+        <div class="sec-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>チームコラボレーション</h4>
+        <p>GPTsの共有、ワークフロー連携、チーム全体でのナレッジ蓄積が可能に。</p>
+      </div>
+      <div class="sec-point">
+        <div class="sec-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <h4>利用状況の可視化</h4>
+        <p>誰がどれだけ活用しているか管理画面で把握。トークン消費量によるKPI管理も実現。</p>
+      </div>
+    </div>
+
+    <div class="plan-compare">
+      <table>
+        <tr>
+          <th style="width:30%"></th>
+          <th style="width:35%">個人プラン（現状）</th>
+          <th style="width:35%">法人プラン（推奨）</th>
+        </tr>
+        <tr>
+          <td>データの学習利用</td>
+          <td><span class="badge-danger">学習される可能性あり</span></td>
+          <td><span class="badge-safe">学習に使用されない</span></td>
+        </tr>
+        <tr>
+          <td>チーム共有機能</td>
+          <td>なし（個人で完結）</td>
+          <td><span class="badge-safe">GPTs共有・ワークフロー</span></td>
+        </tr>
+        <tr>
+          <td>利用状況管理</td>
+          <td>不可（誰が何を使っているか不明）</td>
+          <td><span class="badge-safe">管理画面で一元管理</span></td>
+        </tr>
+        <tr>
+          <td>パーソナライズ</td>
+          <td><span class="badge-safe">個人メモリ利用可</span></td>
+          <td>個人メモリは制限あり ※</td>
+        </tr>
+        <tr>
+          <td>最新機能アクセス</td>
+          <td>プランにより制限</td>
+          <td><span class="badge-safe">Codex・エージェント等</span></td>
+        </tr>
+      </table>
+    </div>
+    <div class="cost-note">
+      ※ 法人プランでもカスタムGPTによる業務特化のパーソナライズは十分に可能です。<br>
+      ※ 個人の有料プランは別途維持し、業務用と個人用を分離する運用を推奨します。
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 7: 費用概算 ═══════════ -->
+<section class="slide" id="s7">
+  <div class="slide-inner">
+    <div class="section-num">Section 06</div>
+    <h2>費用概算<small>研修プランの価格体系</small></h2>
+
+    <div class="cost-table">
+      <table>
+        <tr>
+          <th>施策</th>
+          <th>内容</th>
+          <th>費用</th>
+        </tr>
+        <tr>
+          <td><strong>施策① 全体研修</strong></td>
+          <td>2コース選択（B＋D推奨）<br>対象：採用チーム 約14名</td>
+          <td class="cost-highlight">¥500,000 / 回<br><span style="font-size:calc(0.75rem * var(--font-scale)); font-weight:400; color:var(--text-sub);">10名以上一律料金</span></td>
+        </tr>
+        <tr>
+          <td><strong>施策② 育成プラン</strong></td>
+          <td>1対1 個別指導 × 全6回<br>対象：選抜1名</td>
+          <td class="cost-highlight">¥50,000 / 回<br><span style="font-size:calc(0.75rem * var(--font-scale)); font-weight:400; color:var(--text-sub);">1名あたり料金</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card-grid" style="margin-top:28px;">
+      <div class="card">
+        <div class="card-icon gold"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h4>施策①＋②の合計概算</h4>
+        <p style="font-family:var(--font-display); font-size:calc(1.6rem * var(--font-scale)); font-weight:700; color:var(--accent); margin:8px 0;">¥800,000</p>
+        <p>全体研修 ¥500,000 ＋ 個別指導6回 ¥300,000<br>（税別）</p>
+      </div>
+      <div class="card">
+        <div class="card-icon blue"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
+        <h4>柔軟な料金設定</h4>
+        <p>参加人数やコースの組み合わせに応じて柔軟に調整可能です。1コース単体の場合は ¥30,000/名 または ¥300,000/回 でもご相談いただけます。</p>
+      </div>
+    </div>
+
+    <div class="cost-note">
+      ※ 上記は税別価格です。交通費等の実費は別途ご相談となります。<br>
+      ※ 法人プラン（ChatGPT Business等）の月額費用は別途発生します（$25/ユーザー/月〜）。
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 8: スケジュール ═══════════ -->
+<section class="slide" id="s8">
+  <div class="slide-inner">
+    <div class="section-num">Section 07</div>
+    <h2>推奨スケジュール<small>最短で組織のAI活用体制を整える</small></h2>
+
+    <div class="schedule-bar">
+      <div class="sched-block">
+        <div class="sched-period">Phase 1</div>
+        <h4>法人プラン導入</h4>
+        <p>即時〜2週間</p>
+      </div>
+      <div class="sched-block">
+        <div class="sched-period">Phase 2</div>
+        <h4>全体研修（D→B）</h4>
+        <p>導入後 2〜4週間</p>
+      </div>
+      <div class="sched-block">
+        <div class="sched-period">Phase 3</div>
+        <h4>育成プラン開始</h4>
+        <p>研修後〜 月1回×6</p>
+      </div>
+      <div class="sched-block">
+        <div class="sched-period">Phase 4</div>
+        <h4>自走体制へ</h4>
+        <p>約6ヶ月後〜</p>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-top:28px;">
+      <div class="card">
+        <div class="card-icon red"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <h4>Phase 1：法人プラン導入</h4>
+        <p>セキュリティリスク回避のため最優先で実施。経営陣への説明資料はTOKON側でサポートします。現在の個人プラン利用者の移行もご支援します。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon blue"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <h4>Phase 2：全体研修</h4>
+        <p>法人プラン導入後、まずD（リスク管理＆ガバナンス）で社内ルールを策定。その後B（ビジネス基礎）で全員の実務活用をスタートさせます。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon gold"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h4>Phase 3：育成プラン</h4>
+        <p>全体研修と並行して、選抜1名の個別指導を月1回ペースで開始。メタプロンプト・バイブコーディング・Claude Code / Codex・GitHub・ハーネスエンジニアリングを段階的に習得していきます。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon green"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+        <h4>Phase 4：自走体制</h4>
+        <p>育成した推進担当が社内のAI活用を牽引。トークン消費量等のKPIで活用度を測定しながら、継続的に改善サイクルを回せる体制を構築します。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<!-- ═══════════ SLIDE 9: CLOSING ═══════════ -->
+<section class="slide closing" id="s9">
+  <div class="slide-inner">
+    <div class="closing-message">
+      AIは「やれる人がやる」から<br>
+      「全員が安全に使える」へ。
+    </div>
+    <div class="closing-sub">
+      組織全体のAI活用体制構築を、TOKONが伴走いたします。<br>
+      ご不明点やカスタマイズのご希望がございましたら、<br>お気軽にご相談ください。
+    </div>
+    <div class="closing-contact">
+      <h4>株式会社TOKON 事業開発室 AI/デジタルソリューションG</h4>
+      <p>
+        担当：喜多村 一寛（きたむら かずひろ）<br>
+        E-mail：kitamura@tokon.co.jp
+      </p>
+    </div>
+  </div>
+  <div class="slide-footer">Copyright © TOKON All Rights Reserved.</div>
+</section>
+
+<script>
+function toggleTheme() {
+  const body = document.body;
+  const btn = document.getElementById('themeBtn');
+  if (body.getAttribute('data-theme') === 'dark') {
+    body.removeAttribute('data-theme');
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  } else {
+    body.setAttribute('data-theme', 'dark');
+    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+  }
+}
+
+let fontScale = 1;
+function changeFontSize(dir) {
+  fontScale = Math.max(0.75, Math.min(1.4, fontScale + dir * 0.1));
+  document.documentElement.style.setProperty('--font-scale', fontScale);
+}
+</script>
+</body>
+</html>
